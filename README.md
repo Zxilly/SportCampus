@@ -1,3 +1,5 @@
+> 这是一个针对 JGSU 的本地化版本，同样修复了原始版本的一些过时的地方，可能适用于您的学校（不做保证）。
+
 # SportCampus
  An Python Tools For SportCampus （高校体育）
  
