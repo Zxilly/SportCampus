@@ -1,4 +1,4 @@
-host = 'http://www.sportcampus.cn'
+host = 'https://www.sportcampus.cn'
 
 post_data = {"bNode": [], "buPin": "0.0", "busu": "2027", "duration": "20", "endTime": "", "frombp": "0", "goal": "2.00",
              "real": "131622.016746475", "runPageId": "", "speed": "",
@@ -16,11 +16,10 @@ no_free_data = {"bNode": [], "buPin": "0.0", "busu": "2027", "duration": "1000",
                 }
 
 headers = {
-    'Host': 'www.sportcampus.cn',
     'Accept-Language': 'zh-Hans-CN;q=1',
-    'User-Agent': 'CollegeSports2/2.2.14 (iPhone; iOS 11.0; Scale/3.00)',
-    'versionCode': '309',
-    'versionName': '2.2.15',
+    'User-Agent': 'CollegeSports2/2.2.22 (iPhone; iOS 13.6.1; Scale/2.00)',
+    'versionCode': '378',
+    'versionName': '2.2.22',
     'xxversionxx': '20180601',
     'uuid': '',
     'utoken': '',

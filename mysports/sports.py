@@ -40,7 +40,7 @@ def haversine(pos1, pos2):
 
 def get_md5_code(s):
     hl = hashlib.md5()
-    a = 'lpKK*TJE8WaIg%93O0pfn0#xS0i3xE$z' + 'data' + s;
+    a = 'lpKK*TJE8WaIg%93O0pfn0#xS0i3xE$z' + 'data' + s
     hl.update(('lpKK*TJE8WaIg%93O0pfn0#xS0i3xE$z' + 'data' + s).encode('ascii'))
     return hl.hexdigest()
 
@@ -53,7 +53,7 @@ class gps_point:
     def distance(self, ap):
         # todo
         # return geodesic((self.latitude, self.longitude), (ap.latitude, ap.longitude)).kilometers
-        return 2
+        return 3
 
     def zouzou(self, strip=0.001):
         '''

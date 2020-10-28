@@ -8,14 +8,17 @@ from mysports.sports import *
 from path_plan.plan import path_plan, get_school_location
 
 
-def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(2, 4), debug=False):
+def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False):
 
     school_location = get_school_location(school)
     initLocation = str(school_location['lng']) + "," + str(school_location['lat'])
     data = json.dumps({"initLocation": initLocation, "type": "1", "userid": userid})
+
     res = ses.get(host + '/api/run/runPage', params={'sign': get_md5_code(data), 'data': data.encode('ascii')})
+    print(res.json())
     if res.json()['code'] == 404:
         print('<NoFreeRunModule>: 体育锻炼接口返回 JSON：', res.json()['msg'])
+        print(res.headers)
         return
     resj = res.json()['data']
     print('<NoFreeRunModule>: 体育锻炼接口返回 JSON：', resj)
@@ -97,7 +100,8 @@ def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(2, 4), debug=False)
     no_free_data['totalNum'] = "%d" %bushu
     if not debug:
         print('plan run %s km til %s' % (dis, no_free_data['endTime']))
-        time.sleep(duration)
+        print("Ignore it now.")
+        # time.sleep(duration)
     xs = json.dumps(no_free_data)
 
     r = ses.post(host + '/api/run/saveRunV2', data={'sign': get_md5_code(xs), 'data': xs.encode('ascii')})

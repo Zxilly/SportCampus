@@ -9,7 +9,7 @@ from mysports.sports import get_md5_code
 
 def login(mobile, psd, type):
     # 生成 uuid
-    headers['uuid'] = uuid.uuid4().hex.upper()
+    headers['uuid'] = str(uuid.uuid1()).upper()+'-1603887734-753271'
 
     # 启动 session
     s = requests.Session()
@@ -43,4 +43,5 @@ def login(mobile, psd, type):
         raise Exception
 
     s.headers.update({'utoken': utoken})
+
     return userid, s, school
