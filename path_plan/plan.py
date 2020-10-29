@@ -1,7 +1,7 @@
 import hashlib
 import random
 import time
-import urllib
+from urllib.parse import quote,quote_plus
 from typing import List, Dict
 
 import requests
@@ -15,9 +15,9 @@ my_sk = 'tvomES1GLg7w8N3rp2aoCXSoPHrQ28l0'
 
 def get_sn(url: str):
     queryStr = url + '&ak=%s' % my_ak + '&timestamp=%s' % time.time()
-    encodedStr = urllib.parse.quote(queryStr, safe="/:=&?#+!$,;'@()*[]")
+    encodedStr = quote(queryStr, safe="/:=&?#+!$,;'@()*[]")
     rawStr = encodedStr + my_sk
-    sn = hashlib.md5(urllib.parse.quote_plus(rawStr).encode('ascii')).hexdigest()
+    sn = hashlib.md5(quote_plus(rawStr).encode('ascii')).hexdigest()
     return queryStr + '&sn=%s' % sn
 
 
@@ -29,6 +29,7 @@ def url_params(url: str, params: Dict):
 
 
 def get_school_location(school: str):
+    global location
     url = '/geocoder/v2/?'
     school = school.replace('(', '')
     oj = {
@@ -47,6 +48,7 @@ def get_school_location(school: str):
 
 
 def get_route(startp: str, endp: str, region='上海'):
+    global route
     url = '/direction/v1?'
     oj = {
         'origin': startp,
