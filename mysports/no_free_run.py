@@ -67,7 +67,8 @@ def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False)
 
     # path plan
     plan = path_plan(pass_by_ps)
-    dis = max(plan['distance'], 2.7)
+    maxdis = 2.5 + random.randint(1, 20) * 0.01
+    dis = max(plan['distance'], maxdis)
     print(dis)
     print(plan['distance'])
     path = plan['path']
