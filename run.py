@@ -2,7 +2,7 @@ from mysports.no_free_run import no_free_run
 import traceback
 import mysports.login as loginModule
 
-import sec
+import os
 
 
 # 主函数的登陆模块
@@ -49,5 +49,11 @@ def login(account, pwd, type):
 # 主函数入口
 if __name__ == '__main__':
     # 调用登陆方法
-    login(sec.mobile, sec.password, "iPhone 7")
+
     # run(mobile, password, rg=(args.red, args.green), debug=args.debug)
+    if os.getenv('CI'):
+        mobile = os.getenv('MOBILE')
+        password = os.getenv('PASSWORD')
+    else:
+        import sec
+        login(sec.mobile, sec.password, "iPhone 7")
