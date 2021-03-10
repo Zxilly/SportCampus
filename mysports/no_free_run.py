@@ -103,8 +103,9 @@ def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False)
     no_free_data['totalNum'] = "%d" %bushu
     if not debug:
         print('plan run %s km til %s' % (dis, no_free_data['endTime']))
-        print("Ignore it now.")
-        # time.sleep(duration)
+        # print("Ignore it now.")
+        print("Wait for time pass.")
+        time.sleep(duration)
     xs = json.dumps(no_free_data)
 
     r = ses.post(host + '/api/run/saveRunV2', data={'sign': get_md5_code(xs), 'data': xs.encode('ascii')})
