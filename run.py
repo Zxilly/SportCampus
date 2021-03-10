@@ -1,8 +1,8 @@
-from mysports.no_free_run import no_free_run
-import traceback
-import mysports.login as loginModule
-
 import os
+import traceback
+
+import mysports.login as login_module
+from mysports.no_free_run import no_free_run
 
 
 # 主函数的登陆模块
@@ -10,7 +10,7 @@ def login(account, pwd, type):
     global userid, session, school
     try:
         print('正在登陆')
-        userid, session, school = loginModule.login(account, pwd, type)
+        userid, session, school = login_module.login(account, pwd, type)
     except Exception as e:
         traceback.print_exc()
         print('登陆失败')
@@ -38,13 +38,13 @@ def login(account, pwd, type):
 #
 #     print('loging successfully')
 #
-    # try:
-    #     print('try run...')
-    #     dis = no_free_run(userid, s, school=school, rg=rg, debug=debug)
-    #     print('run %s km successfully !\n' % dis)
-    # except Exception as e:
-    #     traceback.print_exc()
-    #     print('run failed')
+# try:
+#     print('try run...')
+#     dis = no_free_run(userid, s, school=school, rg=rg, debug=debug)
+#     print('run %s km successfully !\n' % dis)
+# except Exception as e:
+#     traceback.print_exc()
+#     print('run failed')
 
 # 主函数入口
 if __name__ == '__main__':
@@ -54,6 +54,8 @@ if __name__ == '__main__':
     if os.getenv('CI'):
         mobile = os.getenv('MOBILE')
         password = os.getenv('PASSWORD')
+        login(mobile, password, "iPhone 7")
     else:
         import sec
+
         login(sec.mobile, sec.password, "iPhone 7")
