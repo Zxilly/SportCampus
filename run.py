@@ -28,6 +28,7 @@ def login(account, pwd, type):
         traceback.print_exc()
         print('<MainModule>：体育锻炼失败')
 
+
 # 主函数入口
 if __name__ == '__main__':
     if os.getenv('CI'):
@@ -35,4 +36,7 @@ if __name__ == '__main__':
         password = os.getenv('PASSWORD')
         login(mobile, password, "iPhone 7")
     else:
-        login(sys.argv[1], sys.argv[2], "iPhone 7")
+        try:
+            login(sys.argv[1], sys.argv[2], "iPhone 7")
+        except IndexError:
+            print('请输入手机号和密码')
