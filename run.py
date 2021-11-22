@@ -1,3 +1,4 @@
+import sys
 import os
 import traceback
 
@@ -27,35 +28,11 @@ def login(account, pwd, type):
         traceback.print_exc()
         print('<MainModule>：体育锻炼失败')
 
-
-# def run(account, password, rg=(2, 4), debug=True):
-#     try:
-#         print('try login...')
-#         userid, s, school = login(account, password)
-#     except Exception as e:
-#         traceback.print_exc()
-#         print('login failed')
-#
-#     print('loging successfully')
-#
-# try:
-#     print('try run...')
-#     dis = no_free_run(userid, s, school=school, rg=rg, debug=debug)
-#     print('run %s km successfully !\n' % dis)
-# except Exception as e:
-#     traceback.print_exc()
-#     print('run failed')
-
 # 主函数入口
 if __name__ == '__main__':
-    # 调用登陆方法
-
-    # run(mobile, password, rg=(args.red, args.green), debug=args.debug)
     if os.getenv('CI'):
         mobile = os.getenv('MOBILE')
         password = os.getenv('PASSWORD')
         login(mobile, password, "iPhone 7")
     else:
-        import sec
-
-        login(sec.mobile, sec.password, "iPhone 7")
+        login(sys.argv[1], sys.argv[2], "iPhone 7")
