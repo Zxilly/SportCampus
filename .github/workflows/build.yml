@@ -38,8 +38,15 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    needs: [compile]
+    needs: [ compile ]
     steps:
+      - name: Get current time
+        uses: 1466587594/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDDTHHmmss
+          utcOffset: "+08:00"
+
       - name: Download
         uses: actions/download-artifact@v2
 
@@ -48,6 +55,10 @@ jobs:
           mv run-ubuntu-latest run
           mv run-windows-latest run.exe
 
-      - name: LS
-        run: |
-          ls
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ steps.current-time.outputs.formattedTime }}"
+          title: "SportCampus Binary"
+          prerelease: true
+          files: "run*"
