@@ -61,4 +61,6 @@ jobs:
           automatic_release_tag: "${{ steps.current-time.outputs.formattedTime }}"
           title: "SportCampus Binary"
           prerelease: true
-          files: "run*"
+          files: |
+            run
+            run.exe
