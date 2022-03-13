@@ -6,15 +6,16 @@ from datetime import datetime, timedelta
 from mysports.original_json import no_free_data, host
 from mysports.sports import *
 from path_plan.plan import path_plan, get_school_location
+from mysports.utils import get_token
 
 
 def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False):
-
     school_location = get_school_location(school)
     init_location = str(school_location['lng']) + "," + str(school_location['lat'])
     data = json.dumps({"initLocation": init_location, "type": "1", "userid": userid})
 
-    res = ses.get(host + '/api/run/runPage', params={'sign': get_md5_code(data), 'data': data.encode('ascii')})
+    res = ses.get(host + '/api/run/runPage', headers={'ntoken': get_token()},
+                  params={'sign': get_md5_code(data), 'data': data.encode('ascii')})
     print(res.json())
     if res.json()['code'] == 404:
         print('<NoFreeRunModule>: 体育锻炼接口返回 JSON：', res.json()['msg'])
@@ -89,7 +90,7 @@ def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False)
 
     # peisu = 1000 / (bupin * bufu)
     bupin = random.uniform(120, 140)
-    bushu = random.randint(2000,3000)
+    bushu = random.randint(2000, 3000)
     # construct post data
     no_free_data['endTime'] = (datetime.now() + timedelta(seconds=duration)).strftime("%Y-%m-%d %H:%M:%S")
     no_free_data['startTime'] = startTime
@@ -100,14 +101,15 @@ def no_free_run(userid: str, ses, extra_pn=1, school="", rg=(1, 2), debug=False)
     no_free_data['speed'] = speed
     no_free_data['track'] = path
     no_free_data['buPin'] = '%.1f' % bupin
-    no_free_data['totalNum'] = "%d" %bushu
+    no_free_data['totalNum'] = "%d" % bushu
     if not debug:
         print('plan run %s km til %s' % (dis, no_free_data['endTime']))
-        # print("Ignore it now.")
+        print("Ignore it now.")
         print("Wait for time pass.")
-        time.sleep(duration)
+        # time.sleep(duration)
     xs = json.dumps(no_free_data)
 
-    r = ses.post(host + '/api/run/saveRunV2', data={'sign': get_md5_code(xs), 'data': xs.encode('ascii')})
+    r = ses.post(host + '/api/run/saveRunV2', headers={'ntoken': get_token()},
+                 data={'sign': get_md5_code(xs), 'data': xs.encode('ascii')})
     print(r.content.decode('utf-8'))
     return dis

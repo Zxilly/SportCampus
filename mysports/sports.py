@@ -40,6 +40,7 @@ def haversine(pos1, pos2):
 
 def get_md5_code(s):
     hl = hashlib.md5()
+    # com.example.gita.gxty.c.a.
     hl.update(('0oLBp8JJ5MSjA*Tj0p@CCKNS4z&a7IQRWvqoG7pM' + 'data' + s).encode('ascii'))
     return hl.hexdigest()
 
@@ -112,3 +113,6 @@ class gps_point_list:
     def get_random_supplement(self):
         # todo
         pass
+
+# if __name__ == '__main__':
+#     print(get_md5_code('{"initLocation":"115.030728,27.113142","type":"1","userid":"346541"}'))

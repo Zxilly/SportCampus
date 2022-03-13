@@ -4,6 +4,7 @@ import traceback
 
 import mysports.login as login_module
 from mysports.no_free_run import no_free_run
+from mysports.utils import frida_task
 
 
 # 主函数的登陆模块
@@ -31,12 +32,8 @@ def login(account, pwd):
 
 # 主函数入口
 if __name__ == '__main__':
-    if os.getenv('CI'):
-        mobile = os.getenv('MOBILE')
-        password = os.getenv('PASSWORD')
-        login(mobile, password)
-    else:
-        try:
-            login(sys.argv[1], sys.argv[2])
-        except IndexError:
-            print('请输入手机号和密码')
+    try:
+        # frida_task()
+        login(sys.argv[1], sys.argv[2])
+    except IndexError:
+        print('run.py <mobile> <password>')
