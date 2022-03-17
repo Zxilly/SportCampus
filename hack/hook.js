@@ -30,7 +30,7 @@ setImmediate(function () {
             };
 
             a0.b(context)
-            // WatchMan.init(context, "YD00169669632372", null, a0a.$new())
+            WatchMan.init(context, "YD00169669632372", null, a0a.$new())
 
             setTimeout(function () {
                 WatchMan.setSeniorCollectStatus(true);
